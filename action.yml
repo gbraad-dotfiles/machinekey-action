@@ -1,13 +1,20 @@
 name: "gbraad's machinekey Action"
 description: 'Write machinekey on GitHub runners'
 author: "Gerard Braad <me@gbraad.nl>"
+inputs:
+  ssh_private_key:
+    description: 'SSH private key'
+    required: true
+  ssh_public_key:
+    description: 'SSH public key'
+    required: true
 runs:
   using: 'composite'
   steps:
     - name: Write machine key to file
       run: |
         mkdir -p ~/.ssh
-        printf "%s\n" "${{ secrets.SSH_MACHINE_PRIVATE }}" > ~/.ssh/id_machine
+        printf "%s\n" "$INPUT_SSH_PRIVATE_KEY" > ~/.ssh/id_machine
         chmod 600 ~/.ssh/id_machine
-        printf "%s\n" "${{ secrets.SSH_MACHINE_PUBLIC }}"  > ~/.ssh/id_machine.pub
+        printf "%s\n" "$INPUT_SSH_PUBLIC_KEY"  > ~/.ssh/id_machine.pub
       shell: bash
