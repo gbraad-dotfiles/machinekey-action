@@ -14,7 +14,7 @@ runs:
     - name: Write machine key to file
       run: |
         mkdir -p ~/.ssh
-        printf "%s\n" "$INPUT_SSH_PRIVATE_KEY" > ~/.ssh/id_machine
+        printf "%s\n" "${{ inputs.ssh_private_key }}" > ~/.ssh/id_machine
         chmod 600 ~/.ssh/id_machine
-        printf "%s\n" "$INPUT_SSH_PUBLIC_KEY"  > ~/.ssh/id_machine.pub
+        printf "%s\n" "${{ inputs.ssh_public_key }}"  > ~/.ssh/id_machine.pub
       shell: bash
